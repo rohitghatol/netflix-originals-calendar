@@ -156,7 +156,7 @@ Open browser - http://localhost:3000
 
 ```
 ### Calendar Month/Week/Day Rendering Logic
-* I have made use of an service class to abstract out all the logic 
+* I have made use of an service class to abstract out all the logic and there is a Test Case for the same.
 ```typescript
 export interface ICalendar {
   /**
@@ -216,18 +216,18 @@ export interface ICalendar {
 
 ### State Management
 * As of now, the state management is extremely crude and we use React State (Calendar Component) to manage this.
-* For most part the application fetches all the data at every navigation. This can be improved with segregated api design
+* For most part the application fetches all the data at every navigation. This can be improved with segregated api design (/api/events/:year/:month)
 * Ideally in real world application we would want to have state management like Apollo Cache, Redux or Mobx to have application level state.
 * This application level state would also act like cache and enable instant navigation without wait. 
 
 
 ### Backend API
-* The backend API is a data dump API, as in it does not have any segregation for year/month/date.
-* Ideally the backend API should have this segregation this would greatly reduce the payload
+* The backend API is a data dump API, as in it does not have any segregation for /api/event/:year/:month/:day.
+* Ideally the backend API should have this segregation this would greatly reduce the payload fetched each time
 * I personally prefer going with the GraphQL Route. Here is an example we can optimize the payload with graphql
 
 ```graphql
-query month(month:$month) {     # API to be called for rendering Months, fetches limited launches
+query month(month:$month) {     # API to be called for rendering Months, fetches limited launches (3 per day)
     month(where:{month:$month}) {
        day {
           launches(limit:3) {   # We can even paginate to fetch only the first launches to reduce the payload 
@@ -239,7 +239,7 @@ query month(month:$month) {     # API to be called for rendering Months, fetches
 }
 query day(day:$day) {           # API to called for rendering the Dialog Box, fetches all launches for the day 
     days(where:{day:$day}) {    
-        launches {
+        launches {              # No Pagination - Fetch all the launches for the day
             id
             name
         }
@@ -247,4 +247,23 @@ query day(day:$day) {           # API to called for rendering the Dialog Box, fe
 }
 
 ```
-* We could use a combination of Prefetching a limited set of prev/next months along with graphql subscriptions to update this limited set on the fly. With this approach we can minimize the server calls on each navigation
+* We could use a combination of Pre-fetching a limited set of prev/next months along with graphql subscriptions to update this limited set on the fly. With this approach we can minimize the server calls on each navigation
+
+
+## Performance
+
+## React Profiler
+
+Following are the screenshots of React Profiler
+
+![React Profiler - 1 ](assests/react-profiler-001.png)
+![React Profiler - 1 ](assests/react-profiler-002.png)
+
+## React Profiler
+
+Following are the screenshots of Chrome Performance - User Timings
+
+
+![Chrome Performance - User Timing - 1 ](assests/user-timing-profiling-001.png)
+![Chrome Performance - User Timing - 1 ](assests/user-timing-profiling-002.png)
+![Chrome Performance - User Timing - 1 ](assests/user-timing-profiling-003.png)
