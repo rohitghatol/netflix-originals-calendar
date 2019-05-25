@@ -1,0 +1,71 @@
+.month {
+    display: grid;
+    grid-template-rows: 1fr 1fr 10fr;
+    height: 100%;
+}
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 32px 200px 32px 1fr
+}
+.action {
+    font-size: 24pt;
+    user-select: none;
+    cursor: pointer;
+    padding:10px;
+    color: #aaa;
+}
+
+.action:active {
+    font-weight: bolder;
+}
+
+.action:hover {
+     color: #444;
+}
+
+.title:hover {
+    color: #444;
+}
+
+.title,.action {
+    display:grid;
+    align-content: center;
+    justify-self: center;
+}
+
+.weeks {
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: 1fr;
+    border-right: 1px solid lightgray;
+}
+
+.weekDay {
+    display:grid;
+    padding:10px;
+    align-content: center;
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+}
+.weekDay:hover {
+    background: lightblue;
+}
+
+.days {
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6,1fr);
+    border-right: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+ }
+
+.day {
+    padding:10px;
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+}
+
+.day:hover {
+    background: #eee;
+}
+

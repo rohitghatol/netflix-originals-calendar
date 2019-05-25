@@ -1,0 +1,7 @@
+.truncate {
+    width: 140px; /* Use parent CSS Grid to avoid setting fixed width for ecllipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10pt;
+}

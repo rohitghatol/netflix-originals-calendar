@@ -1,0 +1,5 @@
+/*FIXME - Instead of 100% switch to CSS Grid to stretch out*/
+.container {
+  width:100%;
+  height: 100%;
+}
